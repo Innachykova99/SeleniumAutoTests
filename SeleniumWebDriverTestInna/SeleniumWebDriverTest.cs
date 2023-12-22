@@ -84,8 +84,8 @@ public class SeleniumWebDriverTest
         string productUrl = "https://practice.automationtesting.in/product/thinking-in-html/";
         webDriver.Navigate().GoToUrl(productUrl);
 
-        IWebElement RelatedProduct = webDriver.FindElement(By.CssSelector("li a.woocommerce-LoopProduct-link[href = 'https://practice.automationtesting.in/product/html5-webapp-develpment/']"));
-        RelatedProduct.Click();
+        IWebElement RelatedProduct = webDriver.FindElements(By.CssSelector("a.woocommerce-LoopProduct-link h3")).Single(x => x.Text == "HTML5 WebApp Develpment");
+        JavaScriptClick(RelatedProduct);
 
         WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
         wait.Until(driver => driver.Url.Contains("html5-webapp-develpment"));
@@ -93,6 +93,12 @@ public class SeleniumWebDriverTest
         string expectedUrl = "https://practice.automationtesting.in/product/html5-webapp-develpment/";
         string actualUrl = webDriver.Url;
         Assert.That(expectedUrl, Is.EqualTo(actualUrl), $"Expected URL: {expectedUrl} is not equal to Actual URL: {actualUrl}");
+    }
+
+    private void JavaScriptClick(IWebElement element)
+    {
+        var javaScriptExecutor = (IJavaScriptExecutor)webDriver;
+        javaScriptExecutor.ExecuteScript("arguments[0].click();", element);
     }
 
     [Test]
