@@ -84,7 +84,7 @@ public class SeleniumWebDriverTest
         string productUrl = "https://practice.automationtesting.in/product/thinking-in-html/";
         webDriver.Navigate().GoToUrl(productUrl);
 
-        IWebElement RelatedProduct = webDriver.FindElement(By.LinkText("HTML5 WebApp Develpment")); // css: li a.woocommerce-LoopProduct-link
+        IWebElement RelatedProduct = webDriver.FindElement(By.CssSelector("li a.woocommerce-LoopProduct-link[href = 'https://practice.automationtesting.in/product/html5-webapp-develpment/']"));
         RelatedProduct.Click();
 
         WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
